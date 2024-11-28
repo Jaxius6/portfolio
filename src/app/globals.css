@@ -2,16 +2,67 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Hide scrollbar but maintain functionality */
+::-webkit-scrollbar {
+  display: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Modern, subtle animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes subtleGlow {
+  0% { text-shadow: 0 0 0 rgba(255, 255, 255, 0); }
+  50% { text-shadow: 0 0 20px rgba(255, 255, 255, 0.2); }
+  100% { text-shadow: 0 0 0 rgba(255, 255, 255, 0); }
+}
+
+.gradient-btn {
+  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+  background-size: 200% 100%;
+  transition: all 0.3s ease;
+}
+
+.gradient-btn:hover {
+  background-position: 100% 0;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  @apply text-6xl md:text-8xl font-bold tracking-tighter;
+  animation: fadeIn 0.8s ease-out;
+}
+
+.nav-link {
+  @apply text-lg relative px-4 py-2 transition-all duration-300;
+}
+
+.nav-link::after {
+  content: '';
+  @apply absolute left-0 bottom-0 w-0 h-[1px] bg-current transition-all duration-300;
+}
+
+.nav-link:hover::after {
+  @apply w-full;
+}
+
+/* Theme-specific styles */
+:root {
+  --background: 0 0% 100%;
+  --foreground: 240 10% 3.9%;
+}
+
+[data-theme="dark"] {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
 }
 
 body {

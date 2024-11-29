@@ -14,14 +14,37 @@ html {
 
 /* Modern, subtle animations */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes subtleGlow {
-  0% { text-shadow: 0 0 0 rgba(255, 255, 255, 0); }
-  50% { text-shadow: 0 0 20px rgba(255, 255, 255, 0.2); }
-  100% { text-shadow: 0 0 0 rgba(255, 255, 255, 0); }
+.animate-in {
+  animation: fadeIn 0.5s ease-out forwards;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+.title {
+  @apply text-6xl md:text-8xl font-bold tracking-tighter;
+  animation: fadeIn 0.5s ease-out 0.2s forwards;
+  opacity: 0;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+.nav-link {
+  @apply text-lg relative px-4 py-2 transition-all duration-300;
+  animation: fadeIn 0.5s ease-out 0.4s forwards;
+  opacity: 0;
+}
+
+.nav-link::after {
+  content: '';
+  @apply absolute left-0 bottom-0 w-0 h-[1px] bg-current transition-all duration-300;
+}
+
+.nav-link:hover::after {
+  @apply w-full;
 }
 
 .gradient-btn {
@@ -34,24 +57,6 @@ html {
   background-position: 100% 0;
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.title {
-  @apply text-6xl md:text-8xl font-bold tracking-tighter;
-  animation: fadeIn 0.8s ease-out;
-}
-
-.nav-link {
-  @apply text-lg relative px-4 py-2 transition-all duration-300;
-}
-
-.nav-link::after {
-  content: '';
-  @apply absolute left-0 bottom-0 w-0 h-[1px] bg-current transition-all duration-300;
-}
-
-.nav-link:hover::after {
-  @apply w-full;
 }
 
 /* Hide reCAPTCHA badge on all pages */

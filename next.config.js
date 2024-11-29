@@ -6,6 +6,14 @@ const nextConfig = {
     domains: ['localhost'],
   },
   reactStrictMode: true,
+  poweredByHeader: false,
+  compress: true,
+  optimizeFonts: true,
+  swcMinify: true,
+  experimental: {
+    optimizeCss: true,
+    optimizePackageImports: ['lucide-react'],
+  }
 };
 
 module.exports = nextConfig;

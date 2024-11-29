@@ -4,52 +4,53 @@ import * as React from "react"
 import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 
-function useThemeToggle() {
-  const { theme, setTheme } = useTheme()
+export function ThemeToggle() {
   const [mounted, setMounted] = React.useState(false)
-
+  const { theme, setTheme } = useTheme()
+  
+  // Use a ref to track if we're currently switching themes
+  const isSwitching = React.useRef(false)
+  
   React.useEffect(() => {
     setMounted(true)
-    // Preload the opposite theme
-    const oppositeTheme = theme === 'dark' ? 'light' : 'dark'
-    const preloadTheme = () => {
-      document.documentElement.classList.add(oppositeTheme)
-      requestAnimationFrame(() => {
-        document.documentElement.classList.remove(oppositeTheme)
-      })
-    }
-    preloadTheme()
-  }, [theme])
+  }, [])
 
-  const toggle = React.useCallback(() => {
-    const newTheme = theme === 'dark' ? 'light' : 'dark'
-    // Apply the theme change in the next frame
+  const toggleTheme = React.useCallback((e: React.MouseEvent) => {
+    e.preventDefault()
+    
+    // Prevent multiple rapid clicks
+    if (isSwitching.current) return
+    isSwitching.current = true
+    
+    // Use RAF to batch the updates
     requestAnimationFrame(() => {
+      const newTheme = theme === "dark" ? "light" : "dark"
       setTheme(newTheme)
+      
+      // Reset the switching flag after a short delay
+      setTimeout(() => {
+        isSwitching.current = false
+      }, 100)
     })
   }, [theme, setTheme])
 
-  return { mounted, theme, toggle }
-}
-
-export function ThemeToggle() {
-  const { mounted, theme, toggle } = useThemeToggle()
-
-  // Don't render anything until mounted to prevent hydration mismatch
+  // Early return with same-sized placeholder
   if (!mounted) {
-    return <div className="w-9 h-9" /> // Placeholder to prevent layout shift
+    return <div className="w-9 h-9" />
   }
 
   return (
     <button
-      onClick={toggle}
-      className="fixed top-6 right-6 w-9 h-9 flex items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-800 hover:ring-2 ring-zinc-300 dark:ring-zinc-600 transition-shadow"
+      onClick={toggleTheme}
+      className="fixed top-6 right-6 w-9 h-9 flex items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
       aria-label="Toggle theme"
     >
-      {theme === 'dark' ? (
-        <Sun className="h-4 w-4" />
-      ) : (
-        <Moon className="h-4 w-4" />
+      {mounted && (
+        theme === "dark" ? (
+          <Sun className="h-4 w-4" aria-hidden="true" />
+        ) : (
+          <Moon className="h-4 w-4" aria-hidden="true" />
+        )
       )}
     </button>
   )

@@ -1,22 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import dynamic from "next/dynamic";
 import { BackButton } from "@/components/back-button";
 import {
   LinkedInLogoIcon,
   VideoIcon,
-  FrameIcon,
-  RocketIcon,
   EnvelopeClosedIcon,
 } from "@radix-ui/react-icons";
 import { FaBehanceSquare, FaTwitter } from "react-icons/fa";
 import { SiBluesky } from "react-icons/si";
-
-// Dynamically import confetti to avoid SSR issues
-const confetti = dynamic(() => import('canvas-confetti'), {
-  ssr: false
-});
+import confetti from 'canvas-confetti';
 
 export default function Contact() {
   const [mounted, setMounted] = useState(false);
@@ -34,13 +27,11 @@ export default function Contact() {
     e.preventDefault();
     console.log("Form submitted:", formData);
     
-    if (typeof window !== 'undefined' && confetti) {
-      confetti.default({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.6 }
-      });
-    }
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 }
+    });
 
     setFormData({ name: "", email: "", message: "" });
   };

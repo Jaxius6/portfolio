@@ -23,11 +23,7 @@ export default function RootLayout({
         className={`${inter.className} antialiased min-h-screen bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100`}
         suppressHydrationWarning
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem={false}
-        >
+        <ThemeProvider>
           <ThemeToggle />
           {children}
           <Analytics />

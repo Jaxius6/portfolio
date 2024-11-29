@@ -166,7 +166,7 @@ export default function Contact() {
           <div className="space-y-8">
             <div className="space-y-4">
               <h2 className="text-2xl font-semibold">Thanks for your message!</h2>
-              <p className="text-zinc-600 dark:text-zinc-400">I'll get back to you soon.</p>
+              <p className="text-zinc-600 dark:text-zinc-400">I&apos;ll get back to you soon.</p>
             </div>
             <div className="flex justify-center gap-6 py-4">
               {socialLinks.map((social) => (

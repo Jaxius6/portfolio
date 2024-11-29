@@ -20,7 +20,18 @@ const nextConfig = {
         headers: [
           {
             key: 'Content-Security-Policy',
-            value: "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https:;"
+            value: [
+              "default-src 'self'",
+              "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://*.vercel.live https://vercel.live https://*.vercel.app",
+              "style-src 'self' 'unsafe-inline'",
+              "img-src 'self' data: blob: https:",
+              "font-src 'self' data:",
+              "connect-src 'self' https:",
+              "frame-src 'self' https://*.vercel.app https://vercel.live",
+              "worker-src 'self' blob:",
+              "manifest-src 'self'",
+              "media-src 'self'"
+            ].join('; ')
           },
           {
             key: 'X-DNS-Prefetch-Control',

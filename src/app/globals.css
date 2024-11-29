@@ -54,6 +54,16 @@ html {
   @apply w-full;
 }
 
+/* Hide reCAPTCHA badge on all pages */
+.grecaptcha-badge {
+  visibility: hidden !important;
+}
+
+/* Show reCAPTCHA badge only on contact page */
+.contact-page .grecaptcha-badge {
+  visibility: visible !important;
+}
+
 /* Theme-specific styles */
 :root {
   --background: 0 0% 100%;

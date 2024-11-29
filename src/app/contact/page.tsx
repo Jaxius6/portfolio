@@ -13,6 +13,7 @@ import confetti from 'canvas-confetti';
 
 export default function Contact() {
   const [mounted, setMounted] = useState(false);
+  const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -21,12 +22,72 @@ export default function Contact() {
 
   useEffect(() => {
     setMounted(true);
+    
+    // Load reCAPTCHA v3
+    const script = document.createElement('script');
+    script.src = `https://www.google.com/recaptcha/api.js?render=6LePiI0qAAAAAFpvcGLErn2qxg3DTrwSPOoCmmq3`;
+    script.async = true;
+    script.defer = true;
+    script.onload = () => {
+      window.grecaptcha.ready(() => {
+        console.log('reCAPTCHA ready');
+        setRecaptchaLoaded(true);
+      });
+    };
+    document.head.appendChild(script);
+
+    return () => {
+      document.head.removeChild(script);
+    };
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     try {
+      if (!recaptchaLoaded || !window.grecaptcha) {
+        throw new Error('Security check is still loading. Please wait.');
+      }
+
+      // Execute reCAPTCHA v3
+      console.log('Executing reCAPTCHA...');
+      let token;
+      try {
+        token = await window.grecaptcha.execute('6LePiI0qAAAAAFpvcGLErn2qxg3DTrwSPOoCmmq3', { 
+          action: 'submit' 
+        });
+        console.log('Got token:', {
+          length: token?.length,
+          preview: token ? token.substring(0, 20) + '...' : 'null'
+        });
+      } catch (error) {
+        console.error('Error executing reCAPTCHA:', error);
+        throw new Error('Failed to execute security check');
+      }
+
+      if (!token) {
+        throw new Error('Failed to get security token');
+      }
+
+      // Verify reCAPTCHA token through our API
+      console.log('Sending verification request...');
+      const verifyResponse = await fetch('/api/verify-recaptcha', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ token }),
+      });
+
+      const verifyResult = await verifyResponse.json();
+      console.log('Verification response:', verifyResult);
+      
+      if (!verifyResponse.ok) {
+        throw new Error(verifyResult.error || 'Security check failed');
+      }
+
+      console.log('Verification successful, sending message...');
+      // Only send webhook if reCAPTCHA verification succeeded
       const response = await fetch('https://hook.eu2.make.com/hjwmyvq8wlt89d5rrpbmybywiqokt7i1', {
         method: 'POST',
         headers: {
@@ -47,8 +108,8 @@ export default function Contact() {
 
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {
-      console.error('Error sending message:', error);
-      alert('Failed to send message. Please try again.');
+      console.error('Error:', error);
+      alert(error instanceof Error ? error.message : 'Failed to send message. Please try again.');
     }
   };
 
@@ -90,7 +151,7 @@ export default function Contact() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-6 animate-in">
+    <div className="flex flex-col items-center justify-center min-h-screen p-6 animate-in contact-page">
       <BackButton />
       <div className="w-full max-w-md space-y-8 text-center">
         <div className="space-y-2">
@@ -121,36 +182,38 @@ export default function Contact() {
         </a>
         
         <form onSubmit={handleSubmit} className="space-y-6 text-left" suppressHydrationWarning>
-          <div className="space-y-2">
-            <label htmlFor="name" className="text-sm font-medium">
-              Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              className="w-full p-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-transparent focus:outline-none focus:ring-2 focus:ring-zinc-500 transition-all"
-              suppressHydrationWarning
-            />
-          </div>
-          
-          <div className="space-y-2">
-            <label htmlFor="email" className="text-sm font-medium">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="w-full p-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-transparent focus:outline-none focus:ring-2 focus:ring-zinc-500 transition-all"
-              suppressHydrationWarning
-            />
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="space-y-2">
+              <label htmlFor="name" className="text-sm font-medium">
+                Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                className="w-full p-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-transparent focus:outline-none focus:ring-2 focus:ring-zinc-500 transition-all"
+                suppressHydrationWarning
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <label htmlFor="email" className="text-sm font-medium">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className="w-full p-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-transparent focus:outline-none focus:ring-2 focus:ring-zinc-500 transition-all"
+                suppressHydrationWarning
+              />
+            </div>
           </div>
           
           <div className="space-y-2">
@@ -172,10 +235,25 @@ export default function Contact() {
           <button
             type="submit"
             className="w-full py-3 px-4 rounded-lg text-white gradient-btn focus:outline-none focus:ring-2 focus:ring-zinc-500"
-            suppressHydrationWarning
           >
             Send Message
           </button>
+          
+          <p className="text-xs text-zinc-500 dark:text-zinc-600 text-center">
+            Protected by reCAPTCHA - 
+            <a 
+              href="https://policies.google.com/privacy" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hover:text-zinc-600 dark:hover:text-zinc-500"
+            > Privacy</a> - 
+            <a 
+              href="https://policies.google.com/terms" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hover:text-zinc-600 dark:hover:text-zinc-500"
+            >Terms</a>
+          </p>
         </form>
       </div>
     </div>

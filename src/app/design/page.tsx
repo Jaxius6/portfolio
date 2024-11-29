@@ -30,7 +30,7 @@ export default function Design() {
             before my robot revolution, check out my work:
           </p>
           <Link 
-            href="https://www.behance.net/jacktaylor6" 
+            href="https://www.behance.net/jaxius" 
             target="_blank"
             className="inline-block px-5 py-2 text-base bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors"
           >

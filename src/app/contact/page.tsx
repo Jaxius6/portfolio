@@ -24,22 +24,29 @@ export default function Contact() {
   useEffect(() => {
     setMounted(true);
     
-    // Load reCAPTCHA v3
-    const script = document.createElement('script');
-    script.src = `https://www.google.com/recaptcha/api.js?render=6LePiI0qAAAAAFpvcGLErn2qxg3DTrwSPOoCmmq3`;
-    script.async = true;
-    script.defer = true;
-    script.onload = () => {
-      window.grecaptcha.ready(() => {
-        console.log('reCAPTCHA ready');
-        setRecaptchaLoaded(true);
-      });
-    };
-    document.head.appendChild(script);
+    // Only load reCAPTCHA if we're in the browser
+    if (typeof window !== 'undefined') {
+      // Load reCAPTCHA v3
+      const script = document.createElement('script');
+      script.src = `https://www.google.com/recaptcha/api.js?render=6LePiI0qAAAAAFpvcGLErn2qxg3DTrwSPOoCmmq3`;
+      script.async = true;
+      script.defer = true;
+      script.onload = () => {
+        window.grecaptcha.ready(() => {
+          console.log('reCAPTCHA ready');
+          setRecaptchaLoaded(true);
+        });
+      };
+      document.head.appendChild(script);
 
-    return () => {
-      document.head.removeChild(script);
-    };
+      return () => {
+        // Clean up script tag on unmount
+        const scriptElement = document.querySelector(`script[src="${script.src}"]`);
+        if (scriptElement && document.head.contains(scriptElement)) {
+          document.head.removeChild(scriptElement);
+        }
+      };
+    }
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -139,7 +146,7 @@ export default function Contact() {
     {
       name: "Behance",
       icon: <FaBehanceSquare className="w-6 h-6" />,
-      url: "https://www.behance.net/jacktaylor6",
+      url: "https://www.behance.net/jaxius",
     },
     {
       name: "Bluesky",

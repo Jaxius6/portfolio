@@ -10,7 +10,7 @@ export default function Home() {
         Jack Taylor
       </h1>
       
-      <nav className="flex gap-12">
+      <nav className="flex flex-col md:flex-row gap-6 md:gap-12 text-center md:text-left">
         <Link href="/code" className="nav-link">
           Code
         </Link>

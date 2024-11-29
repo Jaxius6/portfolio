@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import confetti from "canvas-confetti";
+import { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import { BackButton } from "@/components/back-button";
 import {
   LinkedInLogoIcon,
@@ -9,25 +9,38 @@ import {
   FrameIcon,
   RocketIcon,
   EnvelopeClosedIcon,
-  Cross2Icon,
 } from "@radix-ui/react-icons";
+import { FaBehanceSquare, FaTwitter } from "react-icons/fa";
+import { SiBluesky } from "react-icons/si";
+
+// Dynamically import confetti to avoid SSR issues
+const confetti = dynamic(() => import('canvas-confetti'), {
+  ssr: false
+});
 
 export default function Contact() {
+  const [mounted, setMounted] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Form submitted:", formData);
     
-    confetti({
-      particleCount: 100,
-      spread: 70,
-      origin: { y: 0.6 }
-    });
+    if (typeof window !== 'undefined' && confetti) {
+      confetti.default({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+    }
 
     setFormData({ name: "", email: "", message: "" });
   };
@@ -44,8 +57,8 @@ export default function Contact() {
       url: "https://www.linkedin.com/in/jacktaylor6/",
     },
     {
-      name: "X (Twitter)",
-      icon: <Cross2Icon className="w-6 h-6 rotate-45" />,
+      name: "Twitter",
+      icon: <FaTwitter className="w-6 h-6" />,
       url: "https://x.com/JET_Graphics",
     },
     {
@@ -55,15 +68,19 @@ export default function Contact() {
     },
     {
       name: "Behance",
-      icon: <FrameIcon className="w-6 h-6" />,
-      url: "https://www.behance.net/jaxius",
+      icon: <FaBehanceSquare className="w-6 h-6" />,
+      url: "https://www.behance.net/jacktaylor6",
     },
     {
-      name: "BlueSky",
-      icon: <RocketIcon className="w-6 h-6" />,
-      url: "https://bsky.app/profile/jaxius.bsky.social",
+      name: "Bluesky",
+      icon: <SiBluesky className="w-6 h-6" />,
+      url: "https://bsky.app/profile/jacktaylor.bsky.social",
     },
   ];
+
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-6 animate-in">

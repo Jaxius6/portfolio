@@ -150,6 +150,10 @@ export default function Crypto() {
               {
                 name: "Crypto Face",
                 url: "https://youtube.com/@CryptoFace"
+              },
+              {
+                name: "The Crypto Sniper",
+                url: "https://www.youtube.com/@TheCryptoSniper"
               }
             ].map((channel, index) => (
               <Link
@@ -178,7 +182,8 @@ export default function Crypto() {
                   { name: "CoinSpot", url: "https://www.coinspot.com.au?affiliate=53PT2" },
                   { name: "Bybit", url: "https://www.bybit.com/en-US/invite?ref=vvVK8" },
                   { name: "Coinbase", url: "https://www.coinbase.com/join/taylor_hh1" },
-                  { name: "Binance", url: "https://www.binance.com/en/register?ref=D59KHZ4S" }
+                  { name: "Binance", url: "https://www.binance.com/en/register?ref=D59KHZ4S" },
+                  { name: "Phantom Wallet", url: "https://phantom.app/en-GB" }
                 ].map((platform, index) => (
                   <Link
                     key={index}
@@ -196,11 +201,11 @@ export default function Crypto() {
               <h3 className="text-2xl font-semibold text-orange-500">Tracking &amp; Analysis Tools</h3>
               <div className="space-y-2">
                 {[
+                  { name: "Koinly", url: "https://koinly.io/?via=9D064BBC&utm_source=friend" },
                   { name: "CoinTracking", url: "https://cointracking.info?ref=J842046" },
                   { name: "TradingView", url: "https://tradingview.com/gopro/?share_your_love=Jaxius" },
                   { name: "CoinGecko", url: "https://coingecko.com/en" },
-                  { name: "Coin360", url: "https://coin360.com" },
-                  { name: "Phantom Wallet", url: "https://phantom.app/en-GB" }
+                  { name: "Coin360", url: "https://coin360.com" }
                 ].map((tool, index) => (
                   <Link
                     key={index}

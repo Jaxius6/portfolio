@@ -158,7 +158,7 @@ export default function Contact() {
       <div className="w-full max-w-md space-y-8 text-center">
         {!isSubmitted && (
           <div className="space-y-2">
-            <h1 className="text-3xl font-bold tracking-tighter">Contact</h1>
+            <h1 className="text-3xl font-bold tracking-tighter">Contact Jack</h1>
           </div>
         )}
 

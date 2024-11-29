@@ -21,10 +21,10 @@ export default function Crypto() {
               priority
             />
           </div>
-          <h1 className="text-5xl font-bold tracking-tighter bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent">
+          <h1 className="text-3xl md:text-4xl font-bold tracking-tighter leading-relaxed bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent">
             Welcome to Jaxius Crypto Guide
           </h1>
-          <p className="text-2xl text-zinc-600 dark:text-zinc-300 max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-zinc-600 dark:text-zinc-300 max-w-2xl mx-auto leading-relaxed">
             Hi, I&apos;m Jaxius, a designer and crypto trader from Western Australia. Since 2016, 
             I&apos;ve introduced many friends and family to Bitcoin, and now I&apos;m here to help more 
             people like you take your first steps into cryptocurrency.
@@ -32,41 +32,41 @@ export default function Crypto() {
         </div>
 
         {/* Beginner's Guide Section */}
-        <div className="space-y-12 bg-orange-50/50 dark:bg-zinc-900/50 p-12 rounded-3xl">
-          <h2 className="text-4xl font-bold text-orange-500 dark:text-orange-400">
+        <div className="space-y-8 bg-orange-50/50 dark:bg-zinc-900/50 p-8 md:p-12 rounded-3xl">
+          <h2 className="text-2xl md:text-3xl font-bold text-orange-500 dark:text-orange-400 leading-relaxed">
             Beginner&apos;s Guide to Cryptocurrency
           </h2>
           
           <div className="grid md:grid-cols-2 gap-12">
             <div className="space-y-6 text-left">
-              <h3 className="text-2xl font-semibold flex items-center gap-3">
+              <h3 className="text-lg md:text-xl font-semibold flex items-center gap-3">
                 <span className="bg-orange-100 dark:bg-orange-900/50 p-3 rounded-full">1️⃣</span>
                 Educate Yourself
               </h3>
-              <ul className="list-disc pl-5 space-y-2 text-zinc-600 dark:text-zinc-300">
+              <ul className="list-disc pl-5 space-y-2 text-sm md:text-base text-zinc-600 dark:text-zinc-300">
                 <li>Never trust anyone else with your financial decisions.</li>
-                <li>Understand Bitcoin (BTC) and Ethereum (ETH) and why they&apos;re revolutionary.</li>
+                <li>Understand Bitcoin (BTC) and Solana (SOL) and why they&apos;re revolutionary.</li>
                 <li>Learn your tax obligations when dealing with cryptocurrency.</li>
               </ul>
             </div>
 
             <div className="space-y-6 text-left">
-              <h3 className="text-2xl font-semibold flex items-center gap-3">
+              <h3 className="text-lg md:text-xl font-semibold flex items-center gap-3">
                 <span className="bg-orange-100 dark:bg-orange-900/50 p-3 rounded-full">2️⃣</span>
                 Sign Up for CoinSpot
               </h3>
-              <ul className="list-disc pl-5 space-y-2 text-zinc-600 dark:text-zinc-300">
+              <ul className="list-disc pl-5 space-y-2 text-sm md:text-base text-zinc-600 dark:text-zinc-300">
                 <li>Create an account: <Link href="https://www.coinspot.com.au/join/REFVW1JMW" className="text-orange-500 hover:underline">www.coinspot.com.au</Link></li>
                 <li>Complete KYC (Know Your Customer) by submitting ID documents.</li>
               </ul>
             </div>
 
             <div className="space-y-6 text-left">
-              <h3 className="text-2xl font-semibold flex items-center gap-3">
+              <h3 className="text-lg md:text-xl font-semibold flex items-center gap-3">
                 <span className="bg-orange-100 dark:bg-orange-900/50 p-3 rounded-full">3️⃣</span>
                 Budget &amp; Dollar-Cost Average (DCA)
               </h3>
-              <ul className="list-disc pl-5 space-y-2 text-zinc-600 dark:text-zinc-300">
+              <ul className="list-disc pl-5 space-y-2 text-sm md:text-base text-zinc-600 dark:text-zinc-300">
                 <li>Don&apos;t invest all your money at once; spread your risk.</li>
                 <li>Example: $50 every Friday or $200 monthly.</li>
                 <li>Set up recurring purchases for a long-term, stress-free approach.</li>
@@ -74,11 +74,11 @@ export default function Crypto() {
             </div>
 
             <div className="space-y-6 text-left">
-              <h3 className="text-2xl font-semibold flex items-center gap-3">
+              <h3 className="text-lg md:text-xl font-semibold flex items-center gap-3">
                 <span className="bg-orange-100 dark:bg-orange-900/50 p-3 rounded-full">4️⃣</span>
                 Purchase Suggestions
               </h3>
-              <ul className="list-disc pl-5 space-y-2 text-zinc-600 dark:text-zinc-300">
+              <ul className="list-disc pl-5 space-y-2 text-sm md:text-base text-zinc-600 dark:text-zinc-300">
                 <li>BTC (65%), SOL (30%), and a few alts (5%).</li>
               </ul>
             </div>
@@ -86,31 +86,37 @@ export default function Crypto() {
         </div>
 
         {/* Trading Tips Section */}
-        <div className="space-y-12 bg-orange-50/50 dark:bg-zinc-900/50 p-12 rounded-3xl">
-          <h2 className="text-4xl font-bold text-orange-500 dark:text-orange-400">
+        <div className="space-y-8 bg-orange-50/50 dark:bg-zinc-900/50 p-8 md:p-12 rounded-3xl">
+          <h2 className="text-2xl md:text-3xl font-bold text-orange-500 dark:text-orange-400 leading-relaxed">
             Trading Tips
           </h2>
           
           <div className="grid md:grid-cols-3 gap-12">
             <div className="space-y-6 text-left">
-              <h3 className="text-2xl font-semibold text-orange-500">Leverage Warning</h3>
-              <ul className="list-disc pl-5 space-y-2 text-zinc-600 dark:text-zinc-300">
+              <h3 className="text-lg md:text-xl font-semibold text-orange-500">
+                Leverage Warning
+              </h3>
+              <ul className="list-disc pl-5 space-y-2 text-sm md:text-base text-zinc-600 dark:text-zinc-300">
                 <li>Using leverage without proper experience guarantees losses.</li>
                 <li>Start with a fake Bybit account and practise for at least 6 months.</li>
               </ul>
             </div>
 
             <div className="space-y-6 text-left">
-              <h3 className="text-2xl font-semibold text-orange-500">Trading Education</h3>
-              <ul className="list-disc pl-5 space-y-2 text-zinc-600 dark:text-zinc-300">
+              <h3 className="text-lg md:text-xl font-semibold text-orange-500">
+                Trading Education
+              </h3>
+              <ul className="list-disc pl-5 space-y-2 text-sm md:text-base text-zinc-600 dark:text-zinc-300">
                 <li>Study charting, blockchain, DEFI, risk management, and technical analysis.</li>
                 <li>Understand funding fees, liquidations, and market dynamics.</li>
               </ul>
             </div>
 
             <div className="space-y-6 text-left">
-              <h3 className="text-2xl font-semibold text-orange-500">Patience Is Key</h3>
-              <ul className="list-disc pl-5 space-y-2 text-zinc-600 dark:text-zinc-300">
+              <h3 className="text-lg md:text-xl font-semibold text-orange-500">
+                Patience Is Key
+              </h3>
+              <ul className="list-disc pl-5 space-y-2 text-sm md:text-base text-zinc-600 dark:text-zinc-300">
                 <li>Think long-term. The ultimate goal: Own at least 1 BTC.</li>
                 <li>Focus on stacking satoshis and holding strong (HODL).</li>
               </ul>
@@ -119,8 +125,8 @@ export default function Crypto() {
         </div>
 
         {/* Resources Section */}
-        <div className="space-y-12">
-          <h2 className="text-4xl font-bold text-orange-500 dark:text-orange-400">
+        <div className="space-y-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-orange-500 dark:text-orange-400 leading-relaxed">
             Trusted YouTube Channels
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -159,8 +165,8 @@ export default function Crypto() {
         </div>
 
         {/* Tools Section */}
-        <div className="space-y-12">
-          <h2 className="text-4xl font-bold text-orange-500 dark:text-orange-400">
+        <div className="space-y-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-orange-500 dark:text-orange-400 leading-relaxed">
             Referrals &amp; Tools
           </h2>
           
@@ -212,7 +218,7 @@ export default function Crypto() {
 
         {/* Donation Section */}
         <div className="space-y-6 bg-orange-50/50 dark:bg-zinc-900/50 p-12 rounded-3xl">
-          <h2 className="text-4xl font-bold text-orange-500 dark:text-orange-400">
+          <h2 className="text-2xl md:text-3xl font-bold text-orange-500 dark:text-orange-400 leading-relaxed">
             Support the Mission
           </h2>
           <div className="grid md:grid-cols-2 gap-12">
@@ -234,7 +240,7 @@ export default function Crypto() {
 
         {/* Footer */}
         <div className="pt-8 border-t border-zinc-200 dark:border-zinc-800">
-          <p className="text-2xl text-zinc-600 dark:text-zinc-300">
+          <p className="text-base md:text-lg text-zinc-600 dark:text-zinc-300">
             Good luck on your crypto journey! Remember: Educate, invest wisely, and HODL strong!
           </p>
         </div>

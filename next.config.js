@@ -11,8 +11,7 @@ const nextConfig = {
   optimizeFonts: true,
   swcMinify: true,
   experimental: {
-    optimizeCss: true,
-    optimizePackageImports: ['lucide-react'],
+    optimizePackageImports: ['lucide-react']
   }
 };
 

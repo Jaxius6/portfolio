@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen gap-16 px-4">
       <h1 className="title">
-        Jack Taylor
+        Test Page
       </h1>
       
       <nav className="flex flex-col md:flex-row gap-6 md:gap-12 text-center md:text-left">
